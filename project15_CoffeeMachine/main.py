@@ -33,6 +33,8 @@ resources = {
 money = 0
 
 
+# docstrings could also be added to make functions more informative.
+
 def print_report():
     print(f'Water: {resources["water"]}ml\n'
           f'Milk: {resources["milk"]}ml\n'
@@ -41,11 +43,12 @@ def print_report():
 
 
 def check_resources(coffee_type):
+    # This could have been solved by passing in the dictionary of required ingredients and then
+    # looping through the dictionary.
+
     if resources['water'] > MENU[coffee_type]['ingredients']['water']:
         if resources['coffee'] > MENU[coffee_type]['ingredients']['coffee']:
-            if coffee_type == 'espresso':
-                return True, ''
-            elif resources['milk'] > MENU[coffee_type]['ingredients']['milk']:
+            if coffee_type == 'espresso' or resources['milk'] > MENU[coffee_type]['ingredients']['milk']:
                 return True, ''
             return False, 'milk'
         return False, 'coffee'
@@ -61,6 +64,8 @@ def check_payment(money_paid, coffee_type):
 
 
 def make_coffee(coffee_type):
+    # Dictionary looping can also be used here
+
     resources['water'] -= MENU[coffee_type]['ingredients']['water']
     resources['coffee'] -= MENU[coffee_type]['ingredients']['coffee']
     if coffee_type != 'espresso':
@@ -75,7 +80,7 @@ while running:
     coffee_type = input("What would you like? (espresso/latte/cappuccino): ")
     if coffee_type == 'off':
         print("Turning Off")
-        break
+        running = False
     elif coffee_type == 'report':
         print_report()
     elif coffee_type in MENU.keys():
@@ -84,6 +89,7 @@ while running:
             print(f"Sorry there is not enough of {missing}")
             continue
 
+        # This could be its own function
         quarters = int(input("Enter number of quarters ")) * 0.25
         dimes = int(input("Enter number of dimes ")) * 0.1
         nickles = int(input("Enter number of nickles ")) * 0.05
@@ -103,6 +109,6 @@ while running:
             money += MENU[coffee_type]['cost']
 
         make_coffee(coffee_type)
-        print(f"Here is your {coffee_type}, Enjoy!")
+        print(f"Here is your {coffee_type} ☕️, Enjoy!")
     else:
         print("Not a valid command")
