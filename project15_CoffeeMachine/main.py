@@ -106,8 +106,3 @@ while running:
         print(f"Here is your {coffee_type}, Enjoy!")
     else:
         print("Not a valid command")
-
-# Todo: 4. Check resources
-# Todo: 5. Process coins
-# Todo: 6. Check transaction successful
-# Todo: 7. Make coffee
